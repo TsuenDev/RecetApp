@@ -51,4 +51,9 @@ public class BaseDatos extends SQLiteOpenHelper {
         getReadableDatabase().execSQL("UPDATE Receta SET titulo='"+titulo+"', tiempo='"+tiempo+
                 "', ingredientes='"+ingredientes+"', instrucciones = '"+instrucciones+"' WHERE id_receta="+id+"; ");
     }
+
+    public void borrarById(int id){
+        //Metodo que borra la receta cuyo id sea el que le pasamos por parametro
+        getReadableDatabase().execSQL("DELETE FROM Receta WHERE id_receta="+id+";");
+    }
 }

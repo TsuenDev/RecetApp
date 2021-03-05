@@ -63,9 +63,10 @@ public class EditarReceta extends AppCompatActivity {
                     //Llamamos al metodo de nuestra base de datos que actualiza los datos de la BD por los pasados como parametro
                     baseDatos.actualizarDatos(id, titulo, tiempo, ingredientes, instrucciones);
                     //Hacemos un Toast para imprimir un mensaje el cual diga que se ha actualizado los datos
-                    Toast.makeText(getApplicationContext(), "Datos actualizados correctamente", Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), "Datos actualizados correctamente", Toast.LENGTH_SHORT).show();
                     //Hacemos un finish() para que nos lleve a la actividad anterior
-                    finish();
+                    Intent intent = new Intent(getApplicationContext(), MisRecetas.class);
+                    startActivity(intent);
                 }else{
                     Toast.makeText(getApplicationContext(),"Rellene los campos",Toast.LENGTH_SHORT).show();
                 }
