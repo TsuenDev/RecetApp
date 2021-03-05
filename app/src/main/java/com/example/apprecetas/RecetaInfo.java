@@ -79,8 +79,9 @@ public class RecetaInfo extends AppCompatActivity {
                         //Llama al metodo de la base de datos que borrara el registro
                         baseDatos.borrarById(id_receta);
                         Toast.makeText(getApplicationContext(),"Receta eliminada",Toast.LENGTH_SHORT).show();
-                        finish();//Nos mandará a la actividad anterior
-
+                        //Creamos un intent para que nos lleve a la actividad anterior
+                        Intent intent = new Intent(getApplicationContext(), MisRecetas.class);
+                        startActivity(intent);
                     }
                 });
                 //Si pulsa cancelar, se cancelara este DialogAlert
