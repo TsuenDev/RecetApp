@@ -42,6 +42,13 @@ public class BaseDatos extends SQLiteOpenHelper {
     }
 
     public Cursor getById(int id){
+        //Metodo que devuelve datos de la tabla receta cuyo id sea el que se le haya pasado como parametro
         return getReadableDatabase().rawQuery("SELECT * FROM Receta WHERE id_receta="+id+" ;",null);
+    }
+
+    public void actualizarDatos(int id, String titulo, String tiempo, String ingredientes, String instrucciones){
+        //Metodo que actualiza la tabla recetas, los datos de sus columnas por los datos pasados por parameto
+        getReadableDatabase().execSQL("UPDATE Receta SET titulo='"+titulo+"', tiempo='"+tiempo+
+                "', ingredientes='"+ingredientes+"', instrucciones = '"+instrucciones+"' WHERE id_receta="+id+"; ");
     }
 }

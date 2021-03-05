@@ -62,8 +62,6 @@ public class NuevaReceta extends AppCompatActivity {
         imgBtnVolverNuevaReceta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                //startActivity(intent);
                 finish();//Al pulsar el boton volver, finalizara la actividad y nos llevará a la última mostrada
             }
         });

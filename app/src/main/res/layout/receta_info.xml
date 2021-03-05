@@ -30,7 +30,7 @@
                 app:srcCompat="@drawable/abc_vector_test" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textViewMainTitulo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
@@ -44,7 +44,7 @@
                 android:textSize="18sp" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/imageButtonEdit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="3"

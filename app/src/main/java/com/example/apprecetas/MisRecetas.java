@@ -71,7 +71,7 @@ public class MisRecetas extends AppCompatActivity {
             public void onClick(View v)
             {
                 //Creamos un intent para que nos lleve a otra actividad
-                Intent intent = new Intent(getApplicationContext(), NuevaReceta.class);
+                Intent intent = new Intent(getApplicationContext(), EditarReceta.class);
                 startActivity(intent);
             }
         });

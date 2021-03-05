@@ -2,6 +2,7 @@
     <string name="app_name">RecetApp</string>
     <string name="mis_recetas">MIS RECETAS</string>
     <string name="nueva_receta">NUEVA RECETA</string>
+    <string name="editar_tarea">EDITAR RECETA</string>
 
 
 </resources>

@@ -8,24 +8,28 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppRecetas">
-        <activity android:name=".MainActivity"
+        <activity android:name=".EditarReceta"
                   android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NuevaReceta"
-                  android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".MisRecetas"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="adjustNothing">
-        </activity>
-        <activity android:name=".RecetaInfo"
-                  android:screenOrientation="portrait">
-        </activity>
+        <activity
+            android:name=".NuevaReceta"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".MisRecetas"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"></activity>
+        <activity
+            android:name=".RecetaInfo"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

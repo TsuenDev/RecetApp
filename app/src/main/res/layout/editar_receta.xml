@@ -23,7 +23,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/imgBtnVolverNuevaReceta"
+                android:id="@+id/imgBtnVolverEdit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -44,7 +44,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:text="@string/nueva_receta"
+                android:text="@string/editar_tarea"
                 android:textAlignment="textStart"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
@@ -75,7 +75,7 @@
                 android:text="Título" />
 
             <EditText
-                android:id="@+id/editTextTitulo"
+                android:id="@+id/editTextTituloUpd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -99,7 +99,7 @@
                 android:text="Tiempo " />
 
             <EditText
-                android:id="@+id/editTextTiempo"
+                android:id="@+id/editTextTiempoUpd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -122,7 +122,7 @@
                 android:text="Ingredientes" />
 
             <EditText
-                android:id="@+id/editTextIngredientes"
+                android:id="@+id/editTextIngredientesUpd"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -145,7 +145,7 @@
                 android:text="Instrucciones" />
 
             <EditText
-                android:id="@+id/editTextInstrucciones"
+                android:id="@+id/editTextInstruccionesUpd"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -167,7 +167,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnGuardar"
+            android:id="@+id/btnActualizar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -175,7 +175,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="1dp"
             android:layout_weight="1"
-            android:text="GUARDAR" />
+            android:text="ACTUALIZAR" />
 
     </LinearLayout>
 
