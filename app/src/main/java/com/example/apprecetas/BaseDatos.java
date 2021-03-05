@@ -18,7 +18,7 @@ public class BaseDatos extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //Creamos las tablas y las columnas de la base de datos
         db.execSQL("CREATE TABLE Receta(" +
-                "id_receta INT PRIMARY KEY AUTOINCREMENT,"+
+                "id_receta INTEGER   PRIMARY KEY AUTOINCREMENT,"+
                 "titulo VARCHAR NOT NULL,"+
                 "tiempo VARCHAR,"+
                 "ingredientes VARCHAR,"+
@@ -39,5 +39,9 @@ public class BaseDatos extends SQLiteOpenHelper {
     public Cursor getRecetas(){
         //Metodo que nos devuelve datos de la tabla receta
         return getReadableDatabase().query("Receta", null,null,null,null,null,null,null);
+    }
+
+    public Cursor getById(int id){
+        return getReadableDatabase().rawQuery("SELECT * FROM Receta WHERE id_receta="+id+" ;",null);
     }
 }

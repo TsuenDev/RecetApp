@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">AppRecetas</string>
+    <string name="app_name">RecetApp</string>
+    <string name="mis_recetas">MIS RECETAS</string>
+    <string name="nueva_receta">NUEVA RECETA</string>
 
 
 </resources>

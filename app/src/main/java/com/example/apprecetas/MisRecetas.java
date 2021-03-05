@@ -86,9 +86,12 @@ public class MisRecetas extends AppCompatActivity {
         listaRecetas.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String nombre = adapter.getItem(position);
-                Toast.makeText(getApplicationContext(), nombre, Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), mapRecetas.get(nombre), Toast.LENGTH_SHORT).show();
+                String nombre = adapter.getItem(position);//obtenemos el nombre de la posicion
+                int id_receta=mapRecetas.get(nombre); //obtenemos el valor(id) del mapa que tiene como clave el nombre del item de la posicion clickeada
+                //Creamos un intent para que nos lleve a otra actividad la cual nos mostrara los datos del receta
+                Intent intent = new Intent(getApplicationContext(), RecetaInfo.class);
+                intent.putExtra("id_receta",id_receta);//guardamos este valor con un nombre para enviarla a la otra actividad
+                startActivity(intent);
             }
         });
     }
