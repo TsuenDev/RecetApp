@@ -4,6 +4,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -57,10 +59,7 @@ public class RecetaInfo extends AppCompatActivity {
         imageButtonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Creamos un intent para que nos lleve a otra actividad y le pasaremos el id de la receta que este mostrando en ese momento
-                Intent intent = new Intent(getApplicationContext(), EditarReceta.class);
-                intent.putExtra("id_receta",id_receta);//guardamos este valor con un nombre para enviarla a la otra actividad
-                startActivity(intent);
+                setBtnEdit();
             }
         });
 
@@ -68,33 +67,45 @@ public class RecetaInfo extends AppCompatActivity {
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Al pulsar borrar creamos un AlerDialog que nos preguntara si queremos borrar
-                AlertDialog.Builder alert = new AlertDialog.Builder(RecetaInfo.this);
-                alert.setTitle(receta.getTitulo());
-                alert.setMessage("Se va a borrar esta receta, ¿Desea continuar?");
-                //Si pulsamos esta opcion llamara al metodo de la base de datos y eliminara el registro
-                alert.setPositiveButton("Borrar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Llama al metodo de la base de datos que borrara el registro
-                        baseDatos.borrarById(id_receta);
-                        Toast.makeText(getApplicationContext(),"Receta eliminada",Toast.LENGTH_SHORT).show();
-                        //Creamos un intent para que nos lleve a la actividad anterior
-                        Intent intent = new Intent(getApplicationContext(), MisRecetas.class);
-                        startActivity(intent);
-                    }
-                });
-                //Si pulsa cancelar, se cancelara este DialogAlert
-                alert.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-                alert.show();
+                setBtnEliminar();
             }
         });
+    }
+
+    //metodo que asigna funcion al boton editar
+    public void setBtnEdit(){
+        //Creamos un intent para que nos lleve a otra actividad y le pasaremos el id de la receta que este mostrando en ese momento
+        Intent intent = new Intent(getApplicationContext(), EditarReceta.class);
+        intent.putExtra("id_receta",id_receta);//guardamos este valor con un nombre para enviarla a la otra actividad
+        startActivity(intent);
+    }
+    //metodo que asigna funcion al boton eliminar
+    public void setBtnEliminar(){
+        //Al pulsar borrar creamos un AlerDialog que nos preguntara si queremos borrar
+        AlertDialog.Builder alert = new AlertDialog.Builder(RecetaInfo.this);
+        alert.setTitle(receta.getTitulo());
+        alert.setMessage("Se va a borrar esta receta, ¿Desea continuar?");
+        //Si pulsamos esta opcion llamara al metodo de la base de datos y eliminara el registro
+        alert.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //Llama al metodo de la base de datos que borrara el registro
+                baseDatos.borrarById(id_receta);
+                Toast.makeText(getApplicationContext(),"Receta eliminada",Toast.LENGTH_SHORT).show();
+                //Creamos un intent para que nos lleve a la actividad anterior
+                Intent intent = new Intent(getApplicationContext(), MisRecetas.class);
+                startActivity(intent);
+            }
+        });
+        //Si pulsa cancelar, se cancelara este DialogAlert
+        alert.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        alert.show();
     }
 
     //Metodo para obtener los datos de la receta con el id que pasamos por parametro
@@ -111,7 +122,7 @@ public class RecetaInfo extends AppCompatActivity {
             ingredientes = datos.getString(datos.getColumnIndex("ingredientes"));
             instrucciones = datos.getString(datos.getColumnIndex("instrucciones"));
             //Le pasamos los valores los campos de texto de nuestro layout
-            mainTitulo.setText(titulo);
+            mainTitulo.setText(titulo.toUpperCase());
             tituloTv.setText(titulo);
             tiempoTv.setText(tiempo);
             ingredientesTv.setText(ingredientes);
@@ -122,5 +133,32 @@ public class RecetaInfo extends AppCompatActivity {
         }
         //El método retornará un objeto de tipo receta
         return receta;
+    }
+
+    //Creamos un menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.receta_info_menu, menu);
+        return true;
+    }
+    //Le asignamos una funcion cual se haya seleccionado
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.editar_receta:
+                setBtnEdit();
+                return true;
+            case R.id.eliminar_receta:
+                setBtnEliminar();
+                return true;
+            case R.id.salir:
+                finishAffinity();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

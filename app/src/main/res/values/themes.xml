@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.AppRecetas" parent="Theme.MaterialComponents.Light">
+    //"Theme.MaterialComponents.Light"
+    <style name="Theme.AppRecetas" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/grey</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>

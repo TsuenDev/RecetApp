@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,26 +53,7 @@ public class EditarReceta extends AppCompatActivity {
         btnActualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Asignamos el evento onClick para que cuando se pulse actualizar, actualice los datos en la base de datos
-                // Llama a la funcion actualizarDatos() de nuestra clase de base de datos
-                //Le pasamos como parametros los datos que contengan  los editText
-                String titulo=tituloET.getText().toString();
-                String tiempo=tiempoET.getText().toString();
-                String ingredientes=ingredientesET.getText().toString();
-                String instrucciones=instruccionesET.getText().toString();
-
-                //Condicion para comprobar que el editText que tiene el nombre de titulo no este vacio
-                if(!titulo.trim().equals("")) {
-                    //Llamamos al metodo de nuestra base de datos que actualiza los datos de la BD por los pasados como parametro
-                    baseDatos.actualizarDatos(id, titulo, tiempo, ingredientes, instrucciones);
-                    //Hacemos un Toast para imprimir un mensaje el cual diga que se ha actualizado los datos
-                    Toast.makeText(getApplicationContext(), "Datos actualizados correctamente", Toast.LENGTH_SHORT).show();
-                    //Creamos un intent para que nos lleve a la actividad anterior
-                    Intent intent = new Intent(getApplicationContext(), MisRecetas.class);
-                    startActivity(intent);
-                }else{
-                    Toast.makeText(getApplicationContext(),"Rellene los campos",Toast.LENGTH_SHORT).show();
-                }
+                setBtnActualiza();
             }
         });
     }
@@ -93,5 +77,60 @@ public class EditarReceta extends AppCompatActivity {
             ingredientesET.setText(ingredientes);
             instruccionesET.setText(instrucciones);
         }
+    }
+
+    //Creamos un metodo con las funciones que tiene el boton actualiza al ser clickeado
+    public void setBtnActualiza(){
+        //Asignamos el evento onClick para que cuando se pulse actualizar, actualice los datos en la base de datos
+        // Llama a la funcion actualizarDatos() de nuestra clase de base de datos
+        //Le pasamos como parametros los datos que contengan  los editText
+        String titulo=tituloET.getText().toString();
+        String tiempo=tiempoET.getText().toString();
+        String ingredientes=ingredientesET.getText().toString();
+        String instrucciones=instruccionesET.getText().toString();
+
+        //Condicion para comprobar que el editText que tiene el nombre de titulo no este vacio
+        if(!titulo.trim().equals("")) {
+            //Llamamos al metodo de nuestra base de datos que actualiza los datos de la BD por los pasados como parametro
+            baseDatos.actualizarDatos(id, titulo, tiempo, ingredientes, instrucciones);
+            //Hacemos un Toast para imprimir un mensaje el cual diga que se ha actualizado los datos
+            Toast.makeText(getApplicationContext(), "Datos actualizados correctamente", Toast.LENGTH_SHORT).show();
+            //Creamos un intent para que nos lleve a la actividad anterior
+            Intent intent = new Intent(getApplicationContext(), MisRecetas.class);
+            startActivity(intent);
+        }else{
+            Toast.makeText(getApplicationContext(),"Rellene los campos",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //Creamos un menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.editar_receta_menu, menu);
+        return true;
+    }
+    //Le asignamos una funcion cual se haya seleccionado
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.buscarRecetas:
+                Uri webpage = Uri.parse("http://www.google.es/");
+                Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+                return true;
+            case R.id.actualizarReceta:
+                setBtnActualiza();
+                return true;
+            case R.id.salir:
+                finishAffinity();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

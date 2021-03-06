@@ -2,11 +2,17 @@ package com.example.apprecetas;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -20,6 +26,7 @@ import java.util.Map;
 public class MisRecetas extends AppCompatActivity {
     ImageButton imgBtnVolvermisRecetas;
     Button btnNuevaReceta;
+    EditText editTextBuscar;
     ListView listaRecetas;
     ArrayAdapter<String> adapter;
     ArrayList<String> arrayRecetas;
@@ -44,6 +51,25 @@ public class MisRecetas extends AppCompatActivity {
         {
             arrayRecetas.add(recetas.get(i).getTitulo());
         }
+
+        editTextBuscar = findViewById(R.id.editTextBuscar);
+        editTextBuscar.addTextChangedListener(new TextWatcher() {
+            //añadimos al editText que escuchen un evento cuando cambie por ejemplo cuando escribimos
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            //Le decimos que filtre en el adapter la secuencia de caracteres
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         //Rellenar nuestro hashmap que después usaremos para encontrar un valor cuando le pasemos una clave que se le asigna al guardarlo en el map
         mapRecetas = new HashMap<String, Integer>();
@@ -121,4 +147,35 @@ public class MisRecetas extends AppCompatActivity {
         return recetasArrayList;
     }
 
+    //Creamos un menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.mis_recetas, menu);
+        return true;
+    }
+    //Le asignamos una funcion cual se haya seleccionado
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.buscarRecetas:
+                Uri webpage = Uri.parse("http://www.google.es/");
+                Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+                return true;
+            case R.id.nuevaReceta:
+                Intent intent1 = new Intent(getApplicationContext(), NuevaReceta.class);
+                startActivity(intent1);
+                return true;
+            case R.id.salir:
+                finishAffinity();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
